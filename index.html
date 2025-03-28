@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scientific Number Accepter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      max-width: 400px;
+      margin: 30px auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Scientific Number Accepter</h2>
+    <input type="text" id="numberInput" placeholder="Masukkan angka">
+    <button onclick="checkNumber()">Submit</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    function checkNumber() {
+      const input = document.getElementById('numberInput').value.trim();
+      // Regex untuk format angka, baik bilangan desimal standar maupun notasi ilmiah
+      const regex = /^[+-]?(?:[1-9]\d*(?:\.\d+)?|0(?:\.\d+)?)(?:[eE][+-]?\d+)?$/;
+      let result = "";
+      
+      // Cek apakah format dasar sudah sesuai
+      if(regex.test(input)) {
+        // Berdasarkan contoh tugas, angka seperti "-0.21" harus dianggap tidak valid.
+        // Kita lakukan pemeriksaan tambahan: jika input dimulai dengan "-0" dan terdapat titik, maka dianggap tidak valid.
+        if(input.startsWith("-0") && input.length > 1) {
+          result = "No, it is not a number";
+        } else {
+          result = "Yes, it is a number";
+        }
+      } else {
+        result = "No, it is not a number";
+      }
+      
+      document.getElementById("message").textContent = result;
+    }
+  </script>
+</body>
+</html>
